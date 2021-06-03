@@ -192,8 +192,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmChat";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "CHAT APPLICATION";
             this.Load += new System.EventHandler(this.frmChat_Load);
             this.groupBoxMe.ResumeLayout(false);
             this.groupBoxMe.PerformLayout();

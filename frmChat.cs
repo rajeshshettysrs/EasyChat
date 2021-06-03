@@ -43,16 +43,23 @@ namespace EasyChat
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            //binding socket
-            epLocal = new IPEndPoint(IPAddress.Parse(txtLocalIP.Text), Convert.ToInt32(txtLocalPort.Text));
-            sck.Bind(epLocal);
-            //connecting to remote IP
-            epRemote = new IPEndPoint(IPAddress.Parse(txtRemoteIP.Text), Convert.ToInt32(txtRemoteIP.Text));
-            sck.Connect(epRemote);
-            //listening the specific port
-            buffer = new byte[1500];
-            sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallback), buffer);
-
+            try
+            {
+                //binding socket
+                epLocal = new IPEndPoint(IPAddress.Parse(txtLocalIP.Text), Convert.ToInt32(txtLocalPort.Text));
+                sck.Bind(epLocal);
+                //connecting to remote IP
+                epRemote = new IPEndPoint(IPAddress.Parse(txtRemoteIP.Text), Convert.ToInt32(txtRemotelPort.Text));
+                sck.Connect(epRemote);
+                //listening the specific port
+                buffer = new byte[1500];
+                sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallback), buffer);
+                MessageBox.Show("IP :" + txtRemoteIP.Text + " connected successfully");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private string GetLocalIp()
